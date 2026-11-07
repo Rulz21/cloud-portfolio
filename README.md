@@ -10,3 +10,8 @@ My personal portfolio website, hosted on AWS and built the way a real cloud team
 - **Did:** Created AWS account, turned on MFA with an authenticator app, set a $5 monthly budget alert.
 - **Confused by:** My account uses AWS's new "projects" experience, so there was no root user or Security credentials menu. Found MFA under AWS Settings → Manage security and sign-in.
 - **Learned:** MFA protects against stolen passwords. Budgets warn you; spend limits stop spending.
+
+### Session 2: First homepage + Git setup
+- **Did:** Installed Git and VS Code, cloned the repo, created site/index.html, and pushed it to GitHub.
+- **Confused by:** "git is not recognized" error (terminal needed restarting after installing Git); a typo in `user.name`; cloning with a file link instead of the repo link.
+- **Learned:** Repo links end in `.git`. Workflow: clone once, then add → commit → push.
