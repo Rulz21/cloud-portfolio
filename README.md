@@ -17,6 +17,6 @@ My personal portfolio website, hosted on AWS and built the way a real cloud team
 - **Learned:** Repo links end in `.git`. Workflow: clone once, then add → commit → push.
 
 ### Session 3: Create the cloudfront
-- **Did:** Setu up the cloudfront and configure the distribution's settings.
+- **Did:** Set up the cloudfront and configure the distribution's settings.
 - **Confused by:** the choice of the origin type (need to make sure my website use the correct origin)
 - **Learned:** Origin type is just different kind of storerooms. Security should match the risk. My site didnt need one yet.
