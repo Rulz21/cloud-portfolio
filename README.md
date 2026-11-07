@@ -20,3 +20,9 @@ My personal portfolio website, hosted on AWS and built the way a real cloud team
 - **Did:** Set up the cloudfront and configure the distribution's settings.
 - **Confused by:** the choice of the origin type (need to make sure my website use the correct origin)
 - **Learned:** Origin type is just different kind of storerooms. Security should match the risk. My site didnt need one yet.
+
+### Session 4: Infrastructure as Code
+
+- **Did:** Rebuilt the site with Terraform (S3 + OAC + CloudFront + bucket policy), uploaded with aws s3 sync, deleted the hand-made version.
+- **Confused by:** network timeouts downloading the provider; “undeclared resource” and “requires explicit configuration” errors (both caused by unsaved files).
+- **Learned:** Terraform describes the end result and works out the order from references. State = Terraform’s memory; never edit Terraform-managed resources by hand (drift).
