@@ -9,3 +9,7 @@ output "cloudfront_url" {
 output "distribution_id" {
   value = aws_cloudfront_distribution.site.id
 }
+
+output "api_url" {
+  value = "${aws_apigatewayv2_api.counter.api_endpoint}/visit"
+}
