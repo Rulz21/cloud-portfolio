@@ -7,6 +7,15 @@ terraform {
       version = "~> 6.23"
     }
   }
+
+  backend "s3" {
+    bucket       = "hairul-tfstate"
+    key          = "cloud-portfolio/terraform.tfstate"
+    region       = "ap-southeast-2"
+    profile      = "portfolio"
+    encrypt      = true
+    use_lockfile = true
+  }
 }
 
 provider "aws" {
