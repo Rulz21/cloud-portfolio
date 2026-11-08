@@ -31,5 +31,22 @@
     <h2>Contact</h2>
     <p>GitHub: <a href="https://github.com/Rulz21">Rulz21</a></p>
   </section>
+
+    <footer style="margin-top: 48px; color: #6b7280; font-size: 13px;">
+    Viewed <span id="visit-count">...</span> times · counter powered by AWS Lambda + DynamoDB
+  </footer>
+
+  <script>
+    const API_URL = "https://abc123xyz.execute-api.ap-southeast-2.amazonaws.com/visit";
+
+    fetch(API_URL, { method: "POST" })
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("visit-count").textContent = data.count;
+      })
+      .catch(() => {
+        document.getElementById("visit-count").textContent = "unavailable";
+      });
+  </script>
 </body>
 </html>
