@@ -1,0 +1,41 @@
+name: Deploy website
+
+# WHEN the robot runs
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"                            # any change to the website
+      - ".github/workflows/deploy-site.yml"  # or to these instructions
+  workflow_dispatch:                         # adds a manual "Run workflow" button
+
+# The robot's GitHub permissions: read the code, nothing more
+permissions:
+  contents: read
+
+# Never run two deploys at the same time
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+# WHAT the robot does
+jobs:
+  deploy:
+    runs-on: ubuntu-latest   # a fresh Linux computer from GitHub, deleted after the job
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v6
+
+      - name: Log in to AWS
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Upload site to S3
+        run: aws s3 sync site/ "s3://${{ vars.S3_BUCKET }}" --delete
+
+      - name: Clear CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" --paths "/*"
