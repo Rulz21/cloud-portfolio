@@ -32,3 +32,9 @@ My personal portfolio website, hosted on AWS and built the way a real cloud team
 - **Did:** Store terraform transfer state with locking in s3 bucket. Try to make an oidc pass for my github robot
 - **Confused:** SCP cause my github robot cant create an oidc pass and accessing aws
 - **Learned:** SCP is a safe policy. I need to upgrade my aws account to make the oidc pass. I use a least previliege key instead (IAM user - only for my github robot)
+
+### Session 6: Visitor counter
+
+- **Did:** Built a serverless backend (API Gateway → Lambda in Python → DynamoDB) with Terraform, connected it to the site with JavaScript.
+- **Confused by:** Counter showed “unavailable”. Used browser DevTools and found ERR_NAME_NOT_RESOLVED, because the page was still calling a placeholder API URL.
+- **Learned:** CORS limits which websites can call an API from a browser; throttling protects against everything else. DevTools Console is the first place to look when a page misbehaves.
