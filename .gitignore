@@ -4,3 +4,8 @@
 *.tfstate.*
 crash.log
 terraform/build/
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
