@@ -38,3 +38,8 @@ My personal portfolio website, hosted on AWS and built the way a real cloud team
 - **Did:** Built a serverless backend (API Gateway → Lambda in Python → DynamoDB) with Terraform, connected it to the site with JavaScript.
 - **Confused by:** Counter showed “unavailable”. Used browser DevTools and found ERR_NAME_NOT_RESOLVED, because the page was still calling a placeholder API URL.
 - **Learned:** CORS limits which websites can call an API from a browser; throttling protects against everything else. DevTools Console is the first place to look when a page misbehaves.
+
+### Session 7 Automated tester
+- **Did:** Implement an automated code tester using python (pytest)
+- **Confused by:** Thought pytest will show result in terminal. The test will be visible in github's actions tab
+- **Learned:** pytest will collect all my code and test it on github's computer. It is a safety net for forgetting. Great CI pipline too
