@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     response = table.update_item(
         Key={"id": "visitors"},
         UpdateExpression="ADD visit_count :one",
-        ExpressionAttributeValues={":one": 2},
+        ExpressionAttributeValues={":one": 1},
         ReturnValues="UPDATED_NEW",
     )
     count = int(response["Attributes"]["visit_count"])

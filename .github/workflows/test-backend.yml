@@ -1,0 +1,32 @@
+name: Test backend
+
+on:
+  push:
+    paths:
+      - "backend/**"
+      - ".github/workflows/test-backend.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install test tools
+        run: pip install -r backend/counter/requirements-dev.txt
+
+      - name: Run tests
+        run: python -m pytest backend/counter/test -v
