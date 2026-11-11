@@ -2,10 +2,13 @@ import json
 import os
 
 import boto3
+from botocore.config import Config
+
+# Fail fast instead of hanging if DynamoDB is slow to respond
+AWS_CONFIG = Config(connect_timeout=2, read_timeout=2, retries={"max_attempts": 2})
 
 # Connect to the DynamoDB table. Its name comes from an environment variable set by Terraform.
-table = boto3.resource("dynamodb").Table(os.environ["TABLE_NAME"])
-
+table = boto3.resource("dynamodb", config=AWS_CONFIG).Table(os.environ["TABLE_NAME"])
 
 def lambda_handler(event, context):
     """Runs every time the API is called: add 1 to the counter and return the new value."""
