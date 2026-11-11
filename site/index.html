@@ -3,25 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hairul | Cloud Portfolio</title>
-  <meta name="description" content="Hairul, software engineering student building toward cloud engineering. Portfolio site hosted, automated and tested on AWS.">
+  <title>Hairul | Software Engineering Student</title>
+  <meta name="description" content="Hairul, software engineering student working towards a career in cloud engineering. Education, projects, skills and goals.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231C1233'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%238B5CF6'%3EH%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
 
-  
+  <!--
+    BEFORE YOU PUSH, fill in everything in [square brackets], plus:
+    1. API_URL near the bottom -> copy it from your current index.html
+    2. site/hairul.jpg -> your photo (a big "H" shows until you add it)
+    3. site/cv.pdf -> your CV (or delete the two "Download my CV" links)
+    4. YOUR-LINKEDIN and your@email.com
+    Delete any project, experience or education entry you don't need.
+  -->
 
   <style>
     :root {
       --night: #1C1233;
+      --plum: #2A1D4A;
       --violet: #8B5CF6;
       --violet-deep: #6D3FD8;
       --teal: #0F7F75;
+      --teal-light: #3FBFB2;
       --gold: #D4A63A;
       --mist: #F2EFF9;
       --ink: #1C1233;
       --muted: #5E5873;
+      --line: #DDD6EE;
       --on-night: #EDE8FA;
       --on-night-soft: #B9AED6;
     }
@@ -36,7 +46,6 @@
       font-family: "Instrument Sans", system-ui, sans-serif;
       font-size: 17px;
       line-height: 1.6;
-      overflow-x: hidden;
     }
 
     a { color: inherit; }
@@ -44,32 +53,21 @@
 
     .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
 
-    .display {
+    h1, h2, h3, .display {
       font-family: "Bricolage Grotesque", sans-serif;
       font-weight: 800;
       letter-spacing: -0.02em;
+      line-height: 1.15;
     }
 
-    /* ---------- Header ---------- */
-    .site-header {
-      background: var(--night);
-      color: var(--on-night);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
-
-    .brand { text-decoration: none; line-height: 1.15; }
-    .brand strong { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 22px; font-weight: 800; }
-    .brand span { font-size: 13px; color: var(--on-night-soft); }
-
-    .nav-links { display: flex; align-items: center; gap: 28px; margin: 0; padding: 0; list-style: none; font-size: 15px; }
-    .nav-links a { text-decoration: none; color: var(--on-night-soft); }
-    .nav-links a:hover { color: #fff; }
+    .section { padding: 96px 0; }
+    .section.tint { background: var(--mist); }
+    .section-title { margin: 0 0 40px; font-size: clamp(30px, 4vw, 40px); }
+    .section-intro { margin: -24px 0 40px; max-width: 60ch; color: var(--muted); }
 
     .pill {
       display: inline-block;
-      padding: 9px 20px;
+      padding: 10px 22px;
       border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
@@ -77,171 +75,10 @@
       line-height: 1.4;
     }
 
-    .nav-links .pill { color: #fff; border: 1.5px solid #3FBFB2; }
-    .nav-links .pill:hover { background: rgba(63, 191, 178, 0.15); }
-
-    /* ---------- Intro: portrait spans the dark hero and the white cards row ---------- */
-    .intro { display: grid; grid-template-columns: 340px 1fr; column-gap: 64px; }
-
-    .portrait-cell { grid-column: 1; grid-row: 1 / 3; position: relative; z-index: 1; }
-
-    .portrait {
-      position: relative;
-      margin-top: 56px;
-      height: 560px;
-      border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(165deg, #9B74F8 0%, #5B33B8 55%, #2A1D4A 100%);
-      box-shadow: 0 0 120px 10px rgba(139, 92, 246, 0.35), 0 30px 60px rgba(28, 18, 51, 0.35);
-    }
-
-    .portrait .initials, .avatar .initials {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-weight: 800;
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    .portrait .initials { font-size: 160px; }
-
-    .portrait img, .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-    /* Dark band behind the hero text, stretched to the full page width */
-    .hero-text {
-      grid-column: 2;
-      grid-row: 1;
-      background: var(--night);
-      box-shadow: 0 0 0 100vmax var(--night);
-      clip-path: inset(0 -100vmax);
-      color: var(--on-night);
-      padding: 64px 0 72px;
-    }
-
-    h1 {
-      margin: 0 0 24px;
-      font-size: clamp(40px, 5.2vw, 66px);
-      line-height: 1.02;
-      text-transform: uppercase;
-      color: #fff;
-    }
-
-    h1 span { display: block; }
-
-    .lede { margin: 0 0 32px; max-width: 46ch; font-size: 19px; color: var(--on-night-soft); }
-
-    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
-
-    .pill.solid { background: #3FBFB2; color: var(--night); }
+    .pill.solid { background: var(--teal-light); color: var(--night); }
     .pill.solid:hover { background: #5FD0C4; }
     .pill.ghost { border: 1.5px solid rgba(237, 232, 250, 0.4); color: #fff; }
     .pill.ghost:hover { background: rgba(255, 255, 255, 0.08); }
-
-    .work { grid-column: 2; grid-row: 2; padding: 56px 0 88px; }
-    .work h2 { margin: 0 0 24px; font-size: 26px; }
-
-    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-
-    .card {
-      display: flex;
-      flex-direction: column;
-      border-radius: 16px;
-      padding: 12px 12px 22px;
-      text-decoration: none;
-    }
-
-    .card.teal { background: var(--teal); color: #fff; }
-    .card.gold { background: var(--gold); color: var(--ink); }
-    .card.violet { background: var(--violet-deep); color: #fff; }
-
-    .art {
-      height: 128px;
-      border-radius: 10px;
-      background: var(--night);
-      color: var(--on-night);
-      display: grid;
-      place-items: center;
-      margin-bottom: 18px;
-      overflow: hidden;
-    }
-
-    .teal .art { color: #6FE0D2; }
-    .violet .art { color: #C4ADFF; }
-    .art svg { width: 100%; height: 100%; }
-    .art svg text { font: 600 11px "Instrument Sans", sans-serif; fill: var(--on-night); }
-
-    .live { text-align: center; }
-    .live strong {
-      display: block;
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-weight: 800;
-      font-size: 48px;
-      line-height: 1;
-      color: var(--gold);
-    }
-    .live span { font-size: 13px; color: var(--on-night-soft); }
-
-    .card h3 {
-      margin: 0 6px 6px;
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-weight: 800;
-      font-size: 21px;
-      line-height: 1.2;
-    }
-
-    .card p { margin: 0 6px; font-size: 15px; line-height: 1.5; }
-    .card .tech { margin-top: auto; padding-top: 12px; font-size: 13px; opacity: 0.85; }
-
-    /* ---------- Journal + About ---------- */
-    .story { background: var(--mist); padding: 88px 0; }
-
-    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-
-    .journal {
-      position: relative;
-      margin: 0;
-      background: var(--night);
-      color: var(--on-night);
-      border-radius: 20px;
-      padding: 48px 44px 40px;
-    }
-
-    .journal .mark {
-      position: absolute;
-      top: 14px;
-      left: 38px;
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: 96px;
-      line-height: 1;
-      color: var(--violet);
-    }
-
-    .journal h2 { margin: 28px 0 14px; font-size: 22px; color: #fff; }
-    .journal blockquote { margin: 0 0 24px; font-size: 20px; line-height: 1.5; color: #fff; }
-    .journal cite { font-style: normal; font-size: 14px; color: var(--on-night-soft); }
-
-    .about h2 { margin: 0 0 24px; font-size: 30px; }
-
-    .person { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
-
-    .avatar {
-      position: relative;
-      flex: none;
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      overflow: hidden;
-      background: linear-gradient(165deg, #9B74F8, #5B33B8);
-    }
-
-    .avatar .initials { font-size: 34px; color: #fff; }
-
-    .person strong { display: block; font-size: 18px; }
-    .person span { color: var(--muted); font-size: 15px; }
-
-    .about p { margin: 0 0 16px; color: var(--muted); max-width: 52ch; }
 
     .text-link {
       font-weight: 600;
@@ -250,16 +87,272 @@
       text-underline-offset: 4px;
     }
 
-    /* ---------- Footer ---------- */
-    .site-footer { background: var(--night); color: var(--on-night); padding: 64px 0 40px; }
-    .site-footer h2 { margin: 0 0 8px; font-size: 30px; color: #fff; }
-    .footer-intro { margin: 0 0 40px; color: var(--on-night-soft); }
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--night);
+      color: var(--on-night);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+
+    .brand { text-decoration: none; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 22px; }
+
+    .nav-links { display: flex; align-items: center; gap: 24px; margin: 0; padding: 0; list-style: none; font-size: 15px; }
+    .nav-links a { text-decoration: none; color: var(--on-night-soft); }
+    .nav-links a:hover { color: #fff; }
+    .nav-links .pill { color: #fff; border: 1.5px solid var(--teal-light); padding: 8px 18px; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background:
+        radial-gradient(55% 70% at 85% 100%, rgba(139, 92, 246, 0.35), transparent 70%),
+        var(--night);
+      color: var(--on-night);
+      padding: 80px 0 96px;
+    }
+
+    .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 64px; align-items: center; }
+
+    .hero h1 { margin: 0 0 24px; font-size: clamp(42px, 6vw, 72px); line-height: 1.02; text-transform: uppercase; color: #fff; }
+    .hero h1 span { display: block; }
+
+    .lede { margin: 0 0 28px; max-width: 46ch; font-size: 19px; color: var(--on-night-soft); }
+
+    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 32px; padding: 0; list-style: none; }
+    .facts li {
+      padding: 6px 14px;
+      border: 1px solid rgba(237, 232, 250, 0.2);
+      border-radius: 999px;
+      font-size: 14px;
+      color: var(--on-night);
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .portrait {
+      position: relative;
+      height: 440px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(165deg, #9B74F8 0%, #5B33B8 55%, var(--plum) 100%);
+      box-shadow: 0 0 100px 6px rgba(139, 92, 246, 0.35), 0 30px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .portrait .initials {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: 160px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- About ---------- */
+    .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: start; }
+    .about-text p { margin: 0 0 18px; font-size: 18px; max-width: 60ch; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .quick {
+      margin: 0;
+      padding: 28px 32px;
+      border-radius: 18px;
+      background: var(--mist);
+    }
+
+    .quick div { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .quick div:first-child { padding-top: 0; }
+    .quick div:last-child { padding-bottom: 0; border-bottom: 0; }
+    .quick dt { font-size: 14px; color: var(--muted); }
+    .quick dd { margin: 0; font-weight: 600; }
+
+    /* ---------- Education timeline ---------- */
+    .timeline { margin: 0; padding: 0; list-style: none; }
+
+    .timeline > li { display: grid; grid-template-columns: 170px 1fr; gap: 32px; }
+
+    .when { padding-top: 2px; font-weight: 600; color: var(--violet-deep); }
+
+    .entry {
+      position: relative;
+      padding: 0 0 48px 36px;
+      border-left: 2px solid var(--line);
+    }
+
+    .timeline > li:last-child .entry { padding-bottom: 0; }
+
+    .entry::before {
+      content: "";
+      position: absolute;
+      left: -9px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--mist);
+      border: 3px solid var(--violet);
+    }
+
+    .entry h3 { margin: 0 0 4px; font-size: 22px; }
+    .entry .where { margin: 0 0 12px; color: var(--muted); }
+    .entry ul { margin: 0; padding-left: 20px; }
+    .entry li { margin-bottom: 6px; }
+
+    /* ---------- Projects ---------- */
+    .featured {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--night);
+      color: var(--on-night);
+      margin-bottom: 32px;
+    }
+
+    .featured-body { padding: 44px 44px 40px; }
+    .featured-body .label { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; background: var(--violet-deep); font-size: 13px; font-weight: 600; color: #fff; }
+    .featured-body h3 { margin: 0 0 12px; font-size: 32px; color: #fff; }
+    .featured-body p { margin: 0 0 16px; color: var(--on-night-soft); }
+    .featured-body ul { margin: 0 0 24px; padding-left: 20px; }
+    .featured-body li { margin-bottom: 6px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; }
+    .chips li { padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .featured .chips li { background: rgba(237, 232, 250, 0.1); color: var(--on-night); }
+
+    .featured-links { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .featured-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+      padding: 44px;
+      background:
+        radial-gradient(70% 70% at 70% 30%, rgba(139, 92, 246, 0.35), transparent 70%),
+        var(--plum);
+    }
+
+    .live strong {
+      display: block;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--gold);
+    }
+
+    .live span { color: var(--on-night-soft); font-size: 15px; }
+
+    .journal-quote { margin: 0; padding-left: 18px; border-left: 3px solid var(--violet); }
+    .journal-quote blockquote { margin: 0 0 8px; color: #fff; font-size: 17px; }
+    .journal-quote figcaption { font-size: 13px; color: var(--on-night-soft); }
+
+    .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+
+    .project {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .project .band { height: 10px; }
+    .project.teal .band { background: var(--teal); }
+    .project.gold .band { background: var(--gold); }
+    .project.violet .band { background: var(--violet-deep); }
+
+    .project-body { display: flex; flex-direction: column; flex: 1; padding: 24px 24px 26px; }
+    .project h3 { margin: 0 0 8px; font-size: 21px; }
+    .project p { margin: 0 0 14px; font-size: 15px; color: var(--muted); }
+    .project .role { color: var(--ink); }
+    .project .chips li { background: var(--mist); color: var(--ink); }
+    .project .chips { margin-bottom: 18px; }
+    .project .links { display: flex; gap: 20px; margin-top: auto; font-size: 15px; }
+
+    /* ---------- Experience ---------- */
+    .roles { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+
+    .roles li {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 32px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .roles h3 { margin: 0 0 4px; font-size: 20px; }
+    .roles .meta { margin: 0; color: var(--muted); font-size: 15px; }
+    .roles .desc { margin: 0; }
+
+    /* ---------- Skills ---------- */
+    .skill-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+
+    .skill-group { padding: 26px 24px; border-radius: 18px; background: var(--mist); }
+    .skill-group h3 { margin: 0 0 14px; font-size: 19px; }
+    .skill-group ul { margin: 0; padding: 0; list-style: none; }
+    .skill-group li { padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+    .skill-group li:last-child { border-bottom: 0; }
+
+    .skill-group.learning { background: #fff; border: 2px dashed var(--violet); }
+
+    /* ---------- Goals roadmap ---------- */
+    .goals {
+      background:
+        radial-gradient(50% 80% at 10% 0%, rgba(139, 92, 246, 0.35), transparent 70%),
+        var(--plum);
+      color: var(--on-night);
+    }
+
+    .goals .section-title { color: #fff; }
+    .goals .section-intro { color: var(--on-night-soft); }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .stage { position: relative; padding-top: 40px; border-top: 2px solid rgba(237, 232, 250, 0.25); }
+
+    .stage::before {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .stage .when-label { font-weight: 600; color: var(--gold); }
+    .stage h3 { margin: 6px 0 12px; font-size: 24px; color: #fff; }
+    .stage ul { margin: 0; padding-left: 20px; color: var(--on-night-soft); }
+    .stage li { margin-bottom: 6px; }
+
+    /* ---------- Contact ---------- */
+    .site-footer { background: var(--night); color: var(--on-night); padding: 88px 0 40px; }
+    .site-footer h2 { margin: 0 0 10px; font-size: clamp(30px, 4vw, 40px); color: #fff; }
+    .footer-intro { margin: 0 0 40px; max-width: 52ch; color: var(--on-night-soft); }
 
     .contacts {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 24px;
-      margin: 0 0 48px;
+      margin: 0 0 56px;
       padding: 0;
       list-style: none;
     }
@@ -277,38 +370,31 @@
 
     /* ---------- Smaller screens ---------- */
     @media (max-width: 1000px) {
-      .intro { grid-template-columns: 280px 1fr; column-gap: 40px; }
-      .portrait { height: 480px; }
-      .cards { grid-template-columns: 1fr; }
-      .art { height: 110px; }
+      .hero-grid { grid-template-columns: 1fr 300px; gap: 40px; }
+      .portrait { height: 380px; }
+      .featured { grid-template-columns: 1fr; }
+      .project-grid { grid-template-columns: 1fr 1fr; }
+      .skill-grid { grid-template-columns: 1fr 1fr; }
+      .contacts { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 760px) {
       .wrap { padding: 0 20px; }
-      .nav { height: auto; padding: 16px 0; flex-wrap: wrap; }
+      .section { padding: 64px 0; }
+      .nav { height: auto; padding: 14px 0; }
       .nav-links li:not(:last-child) { display: none; }
 
-      .intro { grid-template-columns: 1fr; }
+      .hero { padding: 40px 0 64px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .portrait { order: -1; height: 300px; max-width: 260px; }
+      .portrait .initials { font-size: 110px; }
 
-      .portrait-cell {
-        grid-column: 1;
-        grid-row: 1;
-        background: var(--night);
-        box-shadow: 0 0 0 100vmax var(--night);
-        clip-path: inset(0 -100vmax);
-        padding-top: 32px;
-      }
-
-      .portrait { margin-top: 0; height: 320px; max-width: 280px; }
-      .portrait .initials { font-size: 120px; }
-
-      .hero-text { grid-column: 1; grid-row: 2; padding: 36px 0 56px; }
-      .work { grid-column: 1; grid-row: 3; padding: 48px 0 64px; }
-
-      .story { padding: 64px 0; }
-      .story-grid { grid-template-columns: 1fr; gap: 40px; }
-      .journal { padding: 44px 28px 32px; }
-      .contacts { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .timeline > li { grid-template-columns: 1fr; gap: 8px; }
+      .when { padding-left: 38px; }
+      .featured-body, .featured-side { padding: 32px 24px; }
+      .project-grid, .skill-grid, .roadmap, .contacts { grid-template-columns: 1fr; }
+      .roles li { grid-template-columns: 1fr; gap: 8px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -320,138 +406,306 @@
 
   <header class="site-header">
     <nav class="wrap nav" aria-label="Main">
-      <a class="brand" href="#top">
-        <strong>Hairul</strong>
-        <span>Cloud portfolio</span>
-      </a>
+      <a class="brand" href="#top">Hairul</a>
       <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="https://github.com/Rulz21/cloud-portfolio">Source code</a></li>
-        <li><a class="pill" href="#contact">Get in touch</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#goals">Goals</a></li>
+        <li><a class="pill" href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="top">
-    <div class="wrap intro">
-      <div class="portrait-cell">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div>
+          <h1 id="hero-title">
+            <span>Hairul.</span>
+            <span>Software engineer</span>
+            <span>in the making.</span>
+          </h1>
+          <p class="lede">Software Engineering student at [Your university], working towards a career in cloud engineering. I learn by building real projects and documenting every step.</p>
+          <ul class="facts">
+            <li>Based in [City, Country]</li>
+            <li>Graduating [Year]</li>
+            <li>Open to cloud and DevOps internships</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="pill solid" href="#projects">See my projects</a>
+            <a class="pill ghost" href="cv.pdf">Download my CV</a>
+          </div>
+        </div>
+
         <div class="portrait">
           <span class="initials" aria-hidden="true">H</span>
           <img src="hairul.jpg" alt="Photo of Hairul" onerror="this.remove()">
         </div>
       </div>
+    </section>
 
-      <section class="hero-text" aria-labelledby="hero-title">
-        <h1 id="hero-title" class="display">
-          <span>Hairul.</span>
-          <span>Building on AWS.</span>
-          <span>Everything as code.</span>
-        </h1>
-        <p class="lede">Software engineering student working towards cloud engineering. This site is my first full cloud project: hosted, automated and tested on AWS.</p>
-        <div class="hero-actions">
-          <a class="pill solid" href="#work">See what I built</a>
-          <a class="pill ghost" href="https://github.com/Rulz21/cloud-portfolio">View the code on GitHub</a>
+    <!-- ===== About ===== -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <h2 class="section-title" id="about-title">About me</h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>[Two or three sentences about your background: where you're from, what got you into technology, and why you chose software engineering.]</p>
+            <p>During my degree I discovered cloud computing, and I've been hooked since. Instead of only reading about it, I built my own portfolio on AWS the way real cloud teams work: infrastructure written as code, changes deployed by a pipeline, and code tested automatically.</p>
+            <p>[One sentence about what you enjoy outside of studying: a hobby, sport or community you're part of.]</p>
+          </div>
+
+          <dl class="quick">
+            <div><dt>Studying</dt><dd>Bachelor of Software Engineering</dd></div>
+            <div><dt>University</dt><dd>[Your university]</dd></div>
+            <div><dt>Focus</dt><dd>Cloud engineering, DevOps</dd></div>
+            <div><dt>Languages</dt><dd>[e.g. English, Malay]</dd></div>
+          </dl>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="work" id="work" aria-labelledby="work-title">
-        <h2 id="work-title" class="display">What's behind this page</h2>
-        <div class="cards">
-          <a class="card teal" href="https://github.com/Rulz21/cloud-portfolio">
-            <div class="art">
-              <svg viewBox="0 0 240 120" aria-hidden="true">
-                <g fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="10" y="44" width="52" height="32" rx="6"/>
-                  <line x1="62" y1="60" x2="88" y2="60"/>
-                  <rect x="88" y="44" width="80" height="32" rx="6"/>
-                  <line x1="168" y1="60" x2="186" y2="60"/>
-                  <rect x="186" y="44" width="44" height="32" rx="6"/>
-                </g>
-                <text x="36" y="64" text-anchor="middle">You</text>
-                <text x="128" y="64" text-anchor="middle">CloudFront</text>
-                <text x="208" y="64" text-anchor="middle">S3</text>
-              </svg>
+    <!-- ===== Education ===== -->
+    <section class="section tint" id="education" aria-labelledby="education-title">
+      <div class="wrap">
+        <h2 class="section-title" id="education-title">Education</h2>
+        <ol class="timeline">
+          <li>
+            <div class="when">[2024] – [Present]</div>
+            <div class="entry">
+              <h3>Bachelor of Software Engineering</h3>
+              <p class="where">[Your university]</p>
+              <ul>
+                <li>Relevant modules: [e.g. Cloud Computing, Networking, Databases, Software Testing]</li>
+                <li>[Achievement: CGPA, Dean's List, scholarship or award]</li>
+              </ul>
             </div>
-            <h3>Website hosting</h3>
-            <p>Files live in a private S3 bucket. Visitors only reach them through CloudFront, over HTTPS.</p>
-            <p class="tech">S3, CloudFront, Origin Access Control</p>
-          </a>
-
-          <a class="card gold" href="https://github.com/Rulz21/cloud-portfolio">
-            <div class="art">
-              <div class="live" aria-live="polite">
-                <strong id="visit-count">…</strong>
-                <span id="visit-note">Counting your visit</span>
-              </div>
+          </li>
+          <li>
+            <div class="when">[2022] – [2024]</div>
+            <div class="entry">
+              <h3>[Previous qualification, e.g. Foundation or Diploma]</h3>
+              <p class="where">[School or college]</p>
+              <ul>
+                <li>[Result or highlight]</li>
+              </ul>
             </div>
-            <h3>Visitor counter</h3>
-            <p>A serverless API counted your visit just now. The number above is live.</p>
-            <p class="tech">API Gateway, Lambda (Python), DynamoDB</p>
-          </a>
-
-          <a class="card violet" href="https://github.com/Rulz21/cloud-portfolio">
-            <div class="art">
-              <svg viewBox="0 0 240 120" aria-hidden="true">
-                <g fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="10" y="44" width="60" height="32" rx="6"/>
-                  <line x1="70" y1="60" x2="90" y2="60"/>
-                  <rect x="90" y="44" width="56" height="32" rx="6"/>
-                  <line x1="146" y1="60" x2="166" y2="60"/>
-                  <rect x="166" y="44" width="64" height="32" rx="6"/>
-                </g>
-                <text x="40" y="64" text-anchor="middle">git push</text>
-                <text x="118" y="64" text-anchor="middle">Test</text>
-                <text x="198" y="64" text-anchor="middle">Deploy</text>
-              </svg>
+          </li>
+          <li>
+            <div class="when">[Year]</div>
+            <div class="entry">
+              <h3>[Secondary school qualification]</h3>
+              <p class="where">[School name]</p>
+              <ul>
+                <li>[Result or highlight]</li>
+              </ul>
             </div>
-            <h3>Automation</h3>
-            <p>Terraform builds the infrastructure. GitHub Actions tests and deploys every change.</p>
-            <p class="tech">Terraform, GitHub Actions, pytest</p>
-          </a>
-        </div>
-      </section>
-    </div>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-    <section class="story" id="about">
-      <div class="wrap story-grid">
-        <figure class="journal">
-          <span class="mark" aria-hidden="true">“</span>
-          <h2 class="display">From my build journal</h2>
-          <blockquote>My AWS account blocked the login method I'd planned for my pipeline. Working out why, and building a secure workaround, taught me more about IAM than any tutorial.</blockquote>
-          <figcaption><cite>Session 5, cloud-portfolio build journal</cite></figcaption>
-        </figure>
+    <!-- ===== Projects ===== -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <h2 class="section-title" id="projects-title">Projects</h2>
 
-        <div class="about">
-          <h2 class="display">About me</h2>
-          <div class="person">
-            <div class="avatar">
-              <span class="initials" aria-hidden="true">H</span>
-              <img src="hairul.jpg" alt="" onerror="this.remove()">
-            </div>
-            <div>
-              <strong>Hairul</strong>
-              <span>Software Engineering student, [Your university]</span>
+        <article class="featured">
+          <div class="featured-body">
+            <span class="label">Featured project</span>
+            <h3>Cloud Portfolio</h3>
+            <p>This website. A static site with a serverless backend, built and deployed entirely from code on AWS.</p>
+            <ul>
+              <li>Private S3 bucket served through CloudFront with HTTPS</li>
+              <li>Serverless visitor counter: API Gateway, Lambda (Python) and DynamoDB</li>
+              <li>All infrastructure written in Terraform, with remote state and locking</li>
+              <li>GitHub Actions deploy the site and run automated tests on every push</li>
+            </ul>
+            <ul class="chips">
+              <li>AWS</li><li>Terraform</li><li>GitHub Actions</li><li>Python</li><li>pytest</li>
+            </ul>
+            <div class="featured-links">
+              <a class="pill solid" href="https://github.com/Rulz21/cloud-portfolio">View the code</a>
+              <a class="pill ghost" href="https://github.com/Rulz21/cloud-portfolio#build-journal">Read the build journal</a>
             </div>
           </div>
-          <p>I learn best by building. Instead of only reading about the cloud, I put this site on AWS and built it the way cloud teams do: infrastructure written as code, changes deployed by a pipeline, and code tested automatically.</p>
-          <p>I keep a journal of every problem I hit and how I solved it, from DNS errors to security policies.</p>
-          <a class="text-link" href="https://github.com/Rulz21/cloud-portfolio#build-journal">Read the full build journal</a>
+
+          <div class="featured-side">
+            <div class="live" aria-live="polite">
+              <strong id="visit-count">…</strong>
+              <span id="visit-note">Counting your visit</span>
+            </div>
+            <figure class="journal-quote">
+              <blockquote>My AWS account blocked the login method I'd planned for my pipeline. Working out why, and building a secure workaround, taught me more about IAM than any tutorial.</blockquote>
+              <figcaption>From my build journal</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <div class="project-grid">
+          <article class="project teal">
+            <div class="band"></div>
+            <div class="project-body">
+              <h3>[Project name]</h3>
+              <p>[One or two sentences: what it does and who it's for.]</p>
+              <p class="role">[Your role, e.g. "Built the backend API in a team of 4"]</p>
+              <ul class="chips"><li>[Tech]</li><li>[Tech]</li><li>[Tech]</li></ul>
+              <div class="links"><a class="text-link" href="#">Code</a><a class="text-link" href="#">Live demo</a></div>
+            </div>
+          </article>
+
+          <article class="project gold">
+            <div class="band"></div>
+            <div class="project-body">
+              <h3>[Project name]</h3>
+              <p>[One or two sentences: what it does and who it's for.]</p>
+              <p class="role">[Your role]</p>
+              <ul class="chips"><li>[Tech]</li><li>[Tech]</li></ul>
+              <div class="links"><a class="text-link" href="#">Code</a></div>
+            </div>
+          </article>
+
+          <article class="project violet">
+            <div class="band"></div>
+            <div class="project-body">
+              <h3>[Project name]</h3>
+              <p>[One or two sentences: what it does and who it's for.]</p>
+              <p class="role">[Your role]</p>
+              <ul class="chips"><li>[Tech]</li><li>[Tech]</li></ul>
+              <div class="links"><a class="text-link" href="#">Code</a></div>
+            </div>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section class="section tint" id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <h2 class="section-title" id="experience-title">Experience and activities</h2>
+        <ul class="roles">
+          <li>
+            <div>
+              <h3>[Role, e.g. Part-time Retail Assistant]</h3>
+              <p class="meta">[Organisation] · [Month Year] – [Month Year]</p>
+            </div>
+            <p class="desc">[One or two sentences about what you did and what you learned, e.g. teamwork, handling customers, responsibility.]</p>
+          </li>
+          <li>
+            <div>
+              <h3>[Role, e.g. Committee Member]</h3>
+              <p class="meta">[Club or society] · [Year]</p>
+            </div>
+            <p class="desc">[What you organised or contributed, with a result if you have one.]</p>
+          </li>
+          <li>
+            <div>
+              <h3>[Hackathon, competition or volunteering]</h3>
+              <p class="meta">[Event] · [Year]</p>
+            </div>
+            <p class="desc">[What you built or did, and any result.]</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <h2 class="section-title" id="skills-title">Skills</h2>
+        <div class="skill-grid">
+          <div class="skill-group">
+            <h3>Cloud and DevOps</h3>
+            <ul>
+              <li>AWS (S3, CloudFront, Lambda, API Gateway, DynamoDB, IAM)</li>
+              <li>Terraform</li>
+              <li>GitHub Actions (CI/CD)</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Programming</h3>
+            <ul>
+              <li>Python</li>
+              <li>JavaScript</li>
+              <li>HTML and CSS</li>
+              <li>[Other languages from your degree]</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Tools</h3>
+            <ul>
+              <li>Git and GitHub</li>
+              <li>AWS CLI</li>
+              <li>VS Code</li>
+              <li>pytest</li>
+            </ul>
+          </div>
+          <div class="skill-group learning">
+            <h3>Currently learning</h3>
+            <ul>
+              <li>AWS Cloud Practitioner exam</li>
+              <li>Docker</li>
+              <li>Linux command line</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Goals ===== -->
+    <section class="section goals" id="goals" aria-labelledby="goals-title">
+      <div class="wrap">
+        <h2 class="section-title" id="goals-title">Where I'm heading</h2>
+        <p class="section-intro">My plan for the next few years, from where I am now to where I want to be.</p>
+        <ol class="roadmap">
+          <li class="stage">
+            <span class="when-label">Now</span>
+            <h3>Build and learn</h3>
+            <ul>
+              <li>Finish my degree</li>
+              <li>Keep building projects on AWS</li>
+              <li>Earn the AWS Certified Cloud Practitioner</li>
+            </ul>
+          </li>
+          <li class="stage">
+            <span class="when-label">Next</span>
+            <h3>Gain real experience</h3>
+            <ul>
+              <li>Land a cloud or DevOps internship</li>
+              <li>Earn the AWS Solutions Architect Associate</li>
+              <li>Learn containers and Kubernetes</li>
+            </ul>
+          </li>
+          <li class="stage">
+            <span class="when-label">Later</span>
+            <h3>Cloud engineer</h3>
+            <ul>
+              <li>Design reliable, secure and cost-efficient cloud systems</li>
+              <li>Help teams ship faster with automation</li>
+            </ul>
+          </li>
+        </ol>
       </div>
     </section>
   </main>
 
+  <!-- ===== Contact ===== -->
   <footer class="site-footer" id="contact">
     <div class="wrap">
-      <h2 class="display">Get in touch</h2>
-      <p class="footer-intro">I'm looking for internships in cloud, DevOps or infrastructure.</p>
+      <h2>Let's talk</h2>
+      <p class="footer-intro">I'm looking for internships in cloud, DevOps or infrastructure. I'm always happy to connect with people working in tech.</p>
       <ul class="contacts">
         <li><span>Email</span><a href="mailto:your@email.com">your@email.com</a></li>
         <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/YOUR-LINKEDIN">linkedin.com/in/YOUR-LINKEDIN</a></li>
         <li><span>GitHub</span><a href="https://github.com/Rulz21">github.com/Rulz21</a></li>
+        <li><span>CV</span><a href="cv.pdf">Download PDF</a></li>
       </ul>
-      <p class="fineprint">© 2026 Hairul. Built with Terraform and deployed by GitHub Actions.</p>
+      <p class="fineprint">© 2026 Hairul. Hosted on AWS, built with Terraform, deployed by GitHub Actions.</p>
     </div>
   </footer>
 
@@ -487,10 +741,10 @@
         if (!response.ok) throw new Error("API returned " + response.status);
         const data = await response.json();
         showCount(Number(data.count));
-        noteEl.textContent = "visits so far, including yours";
+        noteEl.textContent = "visits to this site so far, counted live by my serverless backend";
       } catch (error) {
         countEl.textContent = "–";
-        noteEl.textContent = "Live counter is offline right now";
+        noteEl.textContent = "The live visitor counter is offline right now";
       }
     }
 
