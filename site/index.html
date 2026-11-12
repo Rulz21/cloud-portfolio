@@ -135,25 +135,37 @@
 
     .portrait {
       position: relative;
-      height: 440px;
-      border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(165deg, #9B74F8 0%, #5B33B8 55%, var(--plum) 100%);
-      box-shadow: 0 0 100px 6px rgba(139, 92, 246, 0.35), 0 30px 60px rgba(0, 0, 0, 0.3);
+      height: 480px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
 
-    .portrait .initials {
+    /* The purple panel behind you */
+    .portrait::before {
+      content: "";
       position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-weight: 800;
-      font-size: 160px;
-      color: rgba(255, 255, 255, 0.85);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 70%;
+      border-radius: 28px;
+      background: linear-gradient(160deg, #A78BFA 0%, #6D3FD8 60%, #4C2A9E 100%);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
     }
 
-    .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* You, standing in front of the panel */
+    .portrait img {
+      position: relative;
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: bottom;
+      filter:
+        drop-shadow(0 0 1px rgba(255, 255, 255, 0.35))
+        drop-shadow(14px 18px 22px rgba(0, 0, 0, 0.45));
+    }
 
     /* ---------- About ---------- */
     .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: start; }
@@ -386,8 +398,7 @@
 
       .hero { padding: 40px 0 64px; }
       .hero-grid { grid-template-columns: 1fr; }
-      .portrait { order: -1; height: 300px; max-width: 260px; }
-      .portrait .initials { font-size: 110px; }
+      .portrait { order: -1; height: 340px; max-width: 280px; }
 
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .timeline > li { grid-template-columns: 1fr; gap: 8px; }
@@ -443,7 +454,6 @@
         </div>
 
         <div class="portrait">
-          <span class="initials" aria-hidden="true">H</span>
           <img src="hairul.png" alt="Photo of Hairul" onerror="this.remove()">
         </div>
       </div>
