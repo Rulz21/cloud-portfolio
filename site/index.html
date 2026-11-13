@@ -285,26 +285,21 @@
 
     .project-body { display: flex; flex-direction: column; flex: 1; padding: 24px 24px 26px; }
     .project h3 { margin: 0 0 8px; font-size: 21px; }
+        .project .tag {
+      align-self: flex-start;
+      margin-bottom: 12px;
+      padding: 3px 12px;
+      border-radius: 999px;
+      background: var(--violet-deep);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
     .project p { margin: 0 0 14px; font-size: 15px; color: var(--muted); }
     .project .role { color: var(--ink); }
     .project .chips li { background: var(--mist); color: var(--ink); }
     .project .chips { margin-bottom: 18px; }
     .project .links { display: flex; gap: 20px; margin-top: auto; font-size: 15px; }
-
-    /* ---------- Experience ---------- */
-    .roles { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-
-    .roles li {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 32px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .roles h3 { margin: 0 0 4px; font-size: 20px; }
-    .roles .meta { margin: 0; color: var(--muted); font-size: 15px; }
-    .roles .desc { margin: 0; }
 
     /* ---------- Skills ---------- */
     .skill-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
@@ -422,7 +417,6 @@
         <li><a href="#about">About</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#goals">Goals</a></li>
         <li><a class="pill" href="#contact">Contact</a></li>
@@ -559,14 +553,17 @@
         </article>
 
         <div class="project-grid">
-          <article class="project teal">
+          <article class="project violet">
             <div class="band"></div>
             <div class="project-body">
-              <h3>[Project name]</h3>
-              <p>[One or two sentences: what it does and who it's for.]</p>
-              <p class="role">[Your role, e.g. "Built the backend API in a team of 4"]</p>
+              <span class="tag">Final year project</span>
+              <h3>Cloud Enabled AR Grocery Assistant with Personalized Dietary Guidance</h3>
+              <p>Nutrition labels are hard to read and compare in the aisle, especially for people who have to watch what they eat. This app is for shoppers with health conditions, allergies or dietary preferences: they scan a product and see straight away whether it suits them, plus a healthier alternative if it doesn’t.</p>
+              <p class="role">Solo project supervised by Dr Zaidatol Haslinda</p>
               <ul class="chips"><li>[Tech]</li><li>[Tech]</li><li>[Tech]</li></ul>
-              <div class="links"><a class="text-link" href="#">Code</a><a class="text-link" href="#">Live demo</a></div>
+              <div class="links">
+                <a class="text-link" href="https://github.com/Rulz21/your-repo">Code</a>
+              </div>
             </div>
           </article>
 
@@ -592,36 +589,6 @@
             </div>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- ===== Experience ===== -->
-    <section class="section tint" id="experience" aria-labelledby="experience-title">
-      <div class="wrap">
-        <h2 class="section-title" id="experience-title">Experience and activities</h2>
-        <ul class="roles">
-          <li>
-            <div>
-              <h3>[Role, e.g. Part-time Retail Assistant]</h3>
-              <p class="meta">[Organisation] · [Month Year] – [Month Year]</p>
-            </div>
-            <p class="desc">[One or two sentences about what you did and what you learned, e.g. teamwork, handling customers, responsibility.]</p>
-          </li>
-          <li>
-            <div>
-              <h3>[Role, e.g. Committee Member]</h3>
-              <p class="meta">[Club or society] · [Year]</p>
-            </div>
-            <p class="desc">[What you organised or contributed, with a result if you have one.]</p>
-          </li>
-          <li>
-            <div>
-              <h3>[Hackathon, competition or volunteering]</h3>
-              <p class="meta">[Event] · [Year]</p>
-            </div>
-            <p class="desc">[What you built or did, and any result.]</p>
-          </li>
-        </ul>
       </div>
     </section>
 
