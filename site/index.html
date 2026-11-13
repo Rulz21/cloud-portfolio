@@ -468,6 +468,11 @@
     }
 
     .paper-face img.active { opacity: 1; }
+        /* Show the whole picture (for portrait images) */
+    .paper-face img.fit {
+      object-fit: contain;
+      background: var(--night);
+    }
 
     .paper-hint {
       position: absolute;
@@ -527,6 +532,16 @@
       border-radius: 16px;
       background: #FAF8FE;
       box-shadow: 0 -6px 16px rgba(28, 18, 51, 0.12), 0 18px 40px rgba(28, 18, 51, 0.12);
+    }
+
+        .folder-thumb {
+      display: block;
+      width: 100%;
+      height: 140px;
+      margin-bottom: 18px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: var(--mist);
     }
 
     .folder h3 { margin: 0 0 8px; font-size: 21px; }
@@ -798,7 +813,9 @@
               <button class="paper-face" type="button" aria-expanded="false" aria-label="Show pictures of [Project title]">
                 <img src="images/p1_design.png" alt="AR Grocery Assistant: System design">
                 <img src="images/profile.png" alt="AR Grocery Assistant: Profile panel">
+                <img class="fit" src="images/profile.png" alt="AR Grocery Assistant: Profile panel">
                 <img src="images/admindash.png" alt="AR Grocery Assistant: Admin dashboard">
+                <img class="fit" src="images/admindash.png" alt="AR Grocery Assistant: Admin dashboard">
               </button>
               <span class="paper-hint" aria-hidden="true">Tap anywhere to close</span>
               <div class="paper-nav">
@@ -809,6 +826,7 @@
             </div>
 
             <div class="folder-front">
+              <img class="folder-thumb" src="images/project-01-thumb.jpg" alt="" loading="lazy">
               <span class="tag">Final year project</span>
               <h3>Cloud Enabled AR Grocery Assistant with Personalized Dietary Guidance</h3>
               <p>Nutrition labels are hard to read and compare in the aisle, especially for people who have to watch what they eat. This app is for shoppers with health conditions, allergies or dietary preferences: they scan a product and see straight away whether it suits them, plus a healthier alternative if it doesn’t.</p>
