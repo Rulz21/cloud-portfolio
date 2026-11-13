@@ -375,6 +375,218 @@
       color: var(--on-night-soft);
     }
 
+    /* ---------- Project folders ---------- */
+    .folders {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 80px 28px;
+      margin-top: 88px; /* room for pictures rising above the first row */
+    }
+
+    .folder {
+      --folder: var(--violet-deep);
+      position: relative;
+      padding-top: 96px;
+    }
+
+    .folder.teal { --folder: var(--teal); }
+    .folder.gold { --folder: var(--gold); }
+
+    /* Coloured back of the folder */
+    .folder-back {
+      position: absolute;
+      inset: 28px 0 0 0;
+      border-radius: 16px;
+      background: var(--folder);
+    }
+
+    /* The tab on top */
+    .folder-tab {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 36px;
+      padding: 7px 26px 0;
+      border-radius: 14px 14px 0 0;
+      background: var(--folder);
+      color: #fff;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .folder.gold .folder-tab { color: var(--ink); }
+    .folder:nth-child(3n+2) .folder-tab { left: 50%; transform: translateX(-50%); }
+    .folder:nth-child(3n) .folder-tab { left: auto; right: 0; }
+
+    /* The picture, peeking out like a sheet of paper */
+    .paper {
+      position: absolute;
+      z-index: 1;
+      top: 44px;
+      left: 7%;
+      right: 7%;
+      height: 210px;
+      padding: 8px;
+      border: 0;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(28, 18, 51, 0.25);
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .paper-face {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--mist);
+      cursor: pointer;
+    }
+
+    /* Pictures stacked on top of each other; only the active one is visible */
+    .paper-face img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .paper-face img.active { opacity: 1; }
+
+    /* Extra sheets behind the paper when a folder has several pictures */
+    .paper.multi {
+      box-shadow:
+        7px -7px 0 -1px #EDE8FA,
+        14px -14px 0 -2px #DCD3F0,
+        0 10px 24px rgba(28, 18, 51, 0.25);
+    }
+
+    /* Arrows and counter, shown only when the picture is pulled out */
+    .paper-nav {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 6px;
+      border-radius: 999px;
+      background: rgba(28, 18, 51, 0.8);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .folder.open .paper-nav { display: flex; }
+
+    .paper-nav button {
+      width: 30px;
+      height: 30px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .paper-nav button:hover { background: rgba(255, 255, 255, 0.3); }
+
+    .paper-face:focus-visible, .paper-nav button:focus-visible, .show-btn:focus-visible {
+      outline: 3px solid var(--violet);
+      outline-offset: 3px;
+    }
+
+    .folder:not(.open):not(.closing) .paper:hover { transform: translateY(-12px); }
+
+    /* Front of the folder, holding the text */
+    .folder-front {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      min-height: 300px;
+      padding: 26px 24px 24px;
+      border-radius: 16px;
+      background: #FAF8FE;
+      box-shadow: 0 -6px 16px rgba(28, 18, 51, 0.12), 0 18px 40px rgba(28, 18, 51, 0.12);
+    }
+
+    .folder h3 { margin: 0 0 8px; font-size: 21px; }
+    .folder p { margin: 0 0 14px; font-size: 15px; color: var(--muted); }
+    .folder .role { color: var(--ink); }
+
+    .folder .tag {
+      align-self: flex-start;
+      margin-bottom: 12px;
+      padding: 3px 12px;
+      border-radius: 999px;
+      background: var(--folder);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .folder.gold .tag { color: var(--ink); }
+    .folder .chips { margin-bottom: 18px; }
+    .folder .chips li { background: var(--mist); color: var(--ink); }
+
+    .folder-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 20px;
+      margin-top: auto;
+      font-size: 15px;
+    }
+
+    .show-btn {
+      padding: 7px 16px;
+      border: 1.5px solid var(--folder);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .show-btn:hover { background: var(--mist); }
+
+    /* The slide: up out of the folder, then forward on top */
+    @keyframes pull-out {
+      0%   { transform: translateY(0); z-index: 1; }
+      50%  { transform: translateY(-55%); z-index: 1; }
+      51%  { z-index: 3; }
+      100% { transform: translateY(52px) scale(1.06); z-index: 3; }
+    }
+
+    @keyframes put-back {
+      0%   { transform: translateY(52px) scale(1.06); z-index: 3; }
+      49%  { z-index: 3; }
+      50%  { transform: translateY(-55%); z-index: 1; }
+      100% { transform: translateY(0); z-index: 1; }
+    }
+
+    .folder.open .paper { animation: pull-out 0.8s cubic-bezier(0.3, 0.7, 0.3, 1) forwards; }
+    .folder.closing .paper { animation: put-back 0.7s cubic-bezier(0.3, 0.7, 0.3, 1) forwards; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .folder.open .paper { animation: none; transform: translateY(52px); z-index: 3; }
+      .folder.closing .paper { animation: none; }
+    }    
+
     /* ---------- Smaller screens ---------- */
     @media (max-width: 1000px) {
       .hero-grid { grid-template-columns: 1fr 300px; gap: 40px; }
@@ -383,6 +595,7 @@
       .project-grid { grid-template-columns: 1fr 1fr; }
       .skill-grid { grid-template-columns: 1fr 1fr; }
       .contacts { grid-template-columns: 1fr 1fr; }
+      .folders { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 760px) {
@@ -401,6 +614,7 @@
       .featured-body, .featured-side { padding: 32px 24px; }
       .project-grid, .skill-grid, .roadmap, .contacts { grid-template-columns: 1fr; }
       .roles li { grid-template-columns: 1fr; gap: 8px; }
+      .folders { grid-template-columns: 1fr; gap: 96px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -552,42 +766,54 @@
           </div>
         </article>
 
-        <div class="project-grid">
-          <article class="project violet">
-            <div class="band"></div>
-            <div class="project-body">
+        <div class="folders">
+
+          <article class="folder violet">
+            <span class="folder-tab">Project 01</span>
+            <div class="folder-back"></div>
+            <div class="paper">
+              <button class="paper-face" type="button" data-toggle aria-expanded="false" aria-label="Show pictures of [Project title]">
+                <img src="images/p1_design.png" alt="AR Grocery Assistant: System design">
+                <img src="images/profile.png" alt="AR Grocery Assistant: Dietary profile preferences">
+                <img src="images/admindash.png" alt="AR Grocery Assistant: Admin dashboard">
+              </button>
+              <div class="paper-nav">
+                <button type="button" class="prev" aria-label="Previous picture">‹</button>
+                <span class="counter">1 / 3</span>
+                <button type="button" class="next" aria-label="Next picture">›</button>
+              </div>
+            </div>
+            <div class="folder-front">
               <span class="tag">Final year project</span>
-              <h3>Cloud Enabled AR Grocery Assistant with Personalized Dietary Guidance</h3>
+              <h3>Cloud Enable AR Grocery Assistant with Personlaized Dietary Guidance</h3>
               <p>Nutrition labels are hard to read and compare in the aisle, especially for people who have to watch what they eat. This app is for shoppers with health conditions, allergies or dietary preferences: they scan a product and see straight away whether it suits them, plus a healthier alternative if it doesn’t.</p>
-              <p class="role">Solo project supervised by Dr Zaidatol Haslinda</p>
-              <ul class="chips"><li>[Tech]</li><li>[Tech]</li><li>[Tech]</li></ul>
-              <div class="links">
+              <p class="role">Solo developer</p>
+              <ul class="chips"><li>Unity</li><li>Vuforia AR</li><li>Firebase</li></ul>
+              <div class="folder-actions">
+                <button class="show-btn" type="button" data-toggle data-label aria-expanded="false">Show picture</button>
+                <a class="text-link" href="https://github.com/Rulz21/FINAL-YEAR-PROJECT">Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="folder teal">
+            <span class="folder-tab">Project 02</span>
+            <div class="folder-back"></div>
+            <button class="paper" type="button" data-toggle aria-expanded="false" aria-label="Show picture of [Project title]">
+              <img src="images/project-02.jpg" alt="Screenshot of [Project title]">
+            </button>
+            <div class="folder-front">
+              <h3>[Project title]</h3>
+              <p>[One or two sentences: what it does and who it's for.]</p>
+              <p class="role">[Your role]</p>
+              <ul class="chips"><li>[Tech]</li><li>[Tech]</li></ul>
+              <div class="folder-actions">
+                <button class="show-btn" type="button" data-toggle data-label aria-expanded="false">Show picture</button>
                 <a class="text-link" href="https://github.com/Rulz21/your-repo">Code</a>
               </div>
             </div>
           </article>
 
-          <article class="project gold">
-            <div class="band"></div>
-            <div class="project-body">
-              <h3>[Project name]</h3>
-              <p>[One or two sentences: what it does and who it's for.]</p>
-              <p class="role">[Your role]</p>
-              <ul class="chips"><li>[Tech]</li><li>[Tech]</li></ul>
-              <div class="links"><a class="text-link" href="#">Code</a></div>
-            </div>
-          </article>
-
-          <article class="project violet">
-            <div class="band"></div>
-            <div class="project-body">
-              <h3>[Project name]</h3>
-              <p>[One or two sentences: what it does and who it's for.]</p>
-              <p class="role">[Your role]</p>
-              <ul class="chips"><li>[Tech]</li><li>[Tech]</li></ul>
-              <div class="links"><a class="text-link" href="#">Code</a></div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -728,6 +954,72 @@
     }
 
     loadCount();
+
+     // Project folders: slide pictures out and back in, and flip through them
+    document.querySelectorAll(".folder").forEach((folder) => {
+      const paper = folder.querySelector(".paper");
+      const images = folder.querySelectorAll(".paper-face img");
+      const nav = folder.querySelector(".paper-nav");
+      const counter = folder.querySelector(".counter");
+      const toggles = folder.querySelectorAll("[data-toggle]");
+      let current = 0;
+
+      if (images.length === 0) return;
+      images[0].classList.add("active");
+
+      if (images.length > 1) {
+        paper.classList.add("multi");
+      } else if (nav) {
+        nav.remove();
+      }
+
+      function show(index) {
+        images[current].classList.remove("active");
+        current = (index + images.length) % images.length;
+        images[current].classList.add("active");
+        if (counter) counter.textContent = (current + 1) + " / " + images.length;
+      }
+
+      function setOpen(open) {
+        if (open) {
+          folder.classList.remove("closing");
+          folder.classList.add("open");
+        } else {
+          folder.classList.remove("open");
+          show(0); // go back to the first picture when closing
+          if (!reduceMotion) {
+            folder.classList.add("closing");
+            paper.addEventListener("animationend", () => folder.classList.remove("closing"), { once: true });
+          }
+        }
+        toggles.forEach((button) => {
+          button.setAttribute("aria-expanded", String(open));
+          if (button.hasAttribute("data-label")) {
+            button.textContent = open ? "Put pictures back" : "Show pictures";
+          }
+        });
+      }
+
+      toggles.forEach((button) =>
+        button.addEventListener("click", () => setOpen(!folder.classList.contains("open")))
+      );
+
+      if (nav) {
+        nav.querySelector(".prev").addEventListener("click", () => show(current - 1));
+        nav.querySelector(".next").addEventListener("click", () => show(current + 1));
+      }
+
+      folder.flip = (step) => show(current + step);
+    });
+
+    // Keyboard: Esc puts pictures back, arrow keys flip through an open folder
+    document.addEventListener("keydown", (event) => {
+      const open = document.querySelector(".folder.open");
+      if (!open) return;
+      if (event.key === "Escape") open.querySelector(".paper-face").click();
+      if (event.key === "ArrowRight" && open.flip) open.flip(1);
+      if (event.key === "ArrowLeft" && open.flip) open.flip(-1);
+    });
   </script>
 </body>
 </html>
